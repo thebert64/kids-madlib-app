@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#7c3aed"/>
+  <!-- open book, kept inside the maskable safe zone -->
+  <path d="M256 170 C215 140 160 136 116 148 L116 360 C160 348 215 352 256 382 Z" fill="#ffffff"/>
+  <path d="M256 170 C297 140 352 136 396 148 L396 360 C352 348 297 352 256 382 Z" fill="#f5f3ff"/>
+  <rect x="146" y="196" width="80" height="14" rx="7" fill="#f472b6"/>
+  <rect x="146" y="230" width="66" height="14" rx="7" fill="#60a5fa"/>
+  <rect x="146" y="264" width="80" height="14" rx="7" fill="#34d399"/>
+  <rect x="286" y="196" width="80" height="14" rx="7" fill="#fbbf24"/>
+  <rect x="286" y="230" width="58" height="14" rx="7" fill="#f472b6"/>
+  <rect x="286" y="264" width="80" height="14" rx="7" fill="#60a5fa"/>
+  <path d="M256 170 L256 382" stroke="#c4b5fd" stroke-width="6"/>
+</svg>
