@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Story {
+  id        String   @id @default(cuid())
+  title     String
+  content   String   @default("")
+  shareCode String   @unique @default(cuid())
+  // "freeform" = take turns writing; "madlibs" = fill in blanks, then reveal
+  mode       String   @default("freeform")
+  templateId String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  players   Player[]
+  turns     Turn[]
+  blanks    Blank[]
+  
+  @@index([shareCode])
+}
+
+model Player {
+  id        String   @id @default(cuid())
+  name      String
+  email     String?
+  storyId   String
+  story     Story    @relation(fields: [storyId], references: [id])
+  turns     Turn[]
+  blanks    Blank[]
+  createdAt DateTime @default(now())
+
+  @@index([storyId])
+}
+
+model Turn {
+  id        String   @id @default(cuid())
+  storyId   String
+  story     Story    @relation(fields: [storyId], references: [id], onDelete: Cascade)
+  playerId  String
+  player    Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  content   String
+  order     Int
+  createdAt DateTime @default(now())
+  
+  @@index([storyId])
+  @@index([playerId])
+}
+
+model Blank {
+  id        String   @id @default(cuid())
+  storyId   String
+  story     Story    @relation(fields: [storyId], references: [id], onDelete: Cascade)
+  index     Int
+  kind      String
+  word      String?
+  playerId  String?
+  player    Player?  @relation(fields: [playerId], references: [id], onDelete: SetNull)
+  updatedAt DateTime @updatedAt
+
+  @@unique([storyId, index])
+  @@index([storyId])
+}
